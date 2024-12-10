@@ -12,14 +12,15 @@ public class Main {
 		
 		while( (n=br.readLine()) != null ) {
 			int num = Integer.parseInt(n);
-            // n의 최댓값의 배수는 long형보다도 크므로 BigInteger클래스 사용
-			BigInteger m = new BigInteger("1");
-			
-			while( num % 2 != 0 && num % 5 != 0 ) {
-				if( m.remainder(BigInteger.valueOf(num)) == BigInteger.valueOf(0) ) break;
-				m = m.multiply(BigInteger.valueOf(10)).add(BigInteger.valueOf(1));
+			// 2) 나머지 연산 활용
+			int len = 1;
+			int multi = 1 % num;
+			while( true ) {
+				if( multi % num == 0 ) break;
+				multi = (multi * 10 + 1) % num;
+				len++;
 			}
-			System.out.println(m.toString().length());
+			System.out.println(len);
 		}
 	}
 
