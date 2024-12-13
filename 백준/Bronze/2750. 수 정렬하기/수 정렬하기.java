@@ -14,18 +14,15 @@ public class Main {
 			arr[i] = Integer.parseInt(br.readLine());
 		}
 		
-		// 1) Selection Sort
+		// 2) Bubble Sort
 		for(int i=0; i<N; i++) {
-			// 1. 최대값 찾기
-			int maxIdx = 0;
-			for(int j=1; j<N-i; j++) {
-				if( arr[maxIdx] < arr[j] ) maxIdx = j;
+			for(int j=0; j<N-i-1; j++) {
+				if( arr[j] > arr[j+1] ) {
+					int tmp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = tmp;
+				} 
 			}
-			
-			// 2. 맨 끝과 교환
-			int tmp = arr[maxIdx];
-			arr[maxIdx] = arr[N-i-1];
-			arr[N-i-1] = tmp;
 		}
 		
 		for(int n : arr) {
