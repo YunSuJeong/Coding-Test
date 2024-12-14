@@ -10,16 +10,28 @@ public class Main {
 		
 		int N = Integer.parseInt(br.readLine());
 		
-		int arr[] = new int[N];
+		// 1) Arrays.sort or ArraysList라면 Collections.sort
+//		int arr[] = new int[N];
+//		for(int i=0; i<N; i++) {
+//			arr[i] = Integer.parseInt(br.readLine());
+//		}
+//		
+//		Arrays.sort(arr);
+//		for(int n : arr) {
+//			System.out.println(n);
+//		}
+		
+		// 2) -1,000,000 ~ 1,000,000 숫자를 인덱스로 생각하고 배열에 저장
+		boolean sort[] = new boolean[2000001];	
+		
 		for(int i=0; i<N; i++) {
-			arr[i] = Integer.parseInt(br.readLine());
+			sort[Integer.parseInt(br.readLine())+1000000] = true;
 		}
 		
-		Arrays.sort(arr);
-		
-		for(int n : arr) {
-			System.out.println(n);
+		for(int i=0; i<2000001; i++) {
+			if( sort[i] ) System.out.println(i-1000000);
 		}
+		
 	}
 
 }
