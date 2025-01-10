@@ -15,12 +15,12 @@ public class Main {
 		int M = 1234567891;
 		
 		int arrA[] = new int[L];
-		int arrR[] = new int[L];			// 31의 제곱수들을 r로 나눈 나머지
+		long arrR[] = new long[L];			// 31의 제곱수들을 r로 나눈 나머지
 		
 		arrA[0] = (str.charAt(0)-96)%M;
 		arrR[0] = 1;
 		
-		int sum = (arrA[0]*arrR[0])%M;
+		long sum = (arrA[0]*arrR[0])%M;
 		for(int i=1; i<L; i++) {
 			int n = str.charAt(i)-96;
 			
