@@ -13,11 +13,25 @@ public class Main {
 			int k = Integer.parseInt(br.readLine());
 			int n = Integer.parseInt(br.readLine());
 			
-			System.out.println(recursion(k, n));
+			// 1. 재귀 (400ms)
+			//System.out.println(recursion(k, n));
+			
+			// 2. DP 2차원 배열로 풀어보기
+			int arr[][] = new int[k+1][n+1];
+			for(int i=0; i<=k; i++) {
+				for(int j=0; j<=n; j++) {
+					if( i == 0 || j == 1 ) arr[i][j] = j;
+					
+					if( j > 0 && i > 0 ) {
+						arr[i][j] = arr[i-1][j] + arr[i][j-1];
+					}
+				}
+			}
+			System.out.println(arr[k][n]);
 		}
 	}
 	
-	public static int recursion(int k, int n) {
+	/*public static int recursion(int k, int n) {
 		int sum = 0;
 		if( k <= 0 ) {
 			return n;
@@ -27,6 +41,6 @@ public class Main {
 			}
 			return sum;
 		}
-	}
+	}*/
 
 }
