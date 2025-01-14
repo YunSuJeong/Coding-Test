@@ -18,13 +18,13 @@ public class Main {
 			 int a = Integer.parseInt(st.nextToken());
 			 int b = Integer.parseInt(st.nextToken());
 			 
-			 int gcd = gcd(a, b);
-			 BigInteger lcm = BigInteger.valueOf((a/gcd)).multiply(BigInteger.valueOf((b/gcd))).multiply(BigInteger.valueOf(gcd));
-			 System.out.println(lcm);
+			 long gcd = gcd(a, b);
+			 //BigInteger lcm = BigInteger.valueOf((a/gcd)).multiply(BigInteger.valueOf((a/gcd))).multiply(BigInteger.valueOf(gcd));
+             System.out.println((a/gcd)*(b/gcd)*gcd);
 		 }
 	}
 	
-	public static int gcd(int a, int b) {
+	public static long gcd(int a, int b) {
 		if( b == 0 ) return a;
 		else return gcd(b, a%b);
 	}
