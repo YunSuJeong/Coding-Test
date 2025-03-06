@@ -30,33 +30,30 @@ public class Main {
 			}
 		}
 		
-		// 1. dfs는 시간초과
-		// dfs로 거래소로 갈 수 있는지 확인
-//		dfs(0, 0);
-//		if( flag ) System.out.println("Yes");
-//		else System.out.println("No");
+		// 1. dfs
+		dfs(0, 0);
+		if( flag ) System.out.println("Yes");
+		else System.out.println("No");
 		
 		// 2. bfs 
-		bfs();
-		
-		if( visited[M-1][N-1] ) System.out.println("Yes");
-		else System.out.println("No");
+//		bfs();
+//		if( visited[M-1][N-1] ) System.out.println("Yes");
+//		else System.out.println("No");
 	}
 	
-//	public static void dfs(int x, int y) {
-//		System.out.println(x+" "+y);
-//		if( x == M-1 && y == N-1 ) {
-//			flag = true;
-//			return;
-//		} 
-//		
-//		if( (x+1 < M && y+1 < N && arr[x][y+1] == 0 && arr[x+1][y] == 0) || flag ) return;
-//		
-//		if( y + 1 < N && arr[x][y+1] > 0 ) dfs(x, y+1);		// 동쪽
-//		if( x + 1 < M && arr[x+1][y] > 0 ) dfs(x+1, y);		// 남쪽
-//	}
+	public static void dfs(int x, int y) {
+		if( x == M-1 && y == N-1 ) {
+			flag = true;
+			return;
+		} 
+		
+		visited[x][y] = true;
+		
+		if( y + 1 < N && arr[x][y+1] > 0 && !visited[x][y+1] ) dfs(x, y+1);		// 동쪽
+		if( x + 1 < M && arr[x+1][y] > 0 && !visited[x+1][y] ) dfs(x+1, y);		// 남쪽
+	}
 	
-	public static void bfs() {
+	/* public static void bfs() {
 		Queue<int[]> queue = new LinkedList<int[]>();		// 탐색가능한 점만 저장하는 큐
 		queue.add(new int[]{0, 0});				// 시작점 큐에 넣기
 		visited[0][0] = true;
@@ -77,5 +74,5 @@ public class Main {
 				queue.add(new int[] {x+1, y});
 			}
 		}
-	}
+	}*/
 }
