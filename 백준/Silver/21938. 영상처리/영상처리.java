@@ -52,7 +52,8 @@ public class Main {
 		
 		System.out.println(cnt);
  	}
-	
+
+	// 더 이상 인접한 픽셀이 없을 때까지 탐색 후 리턴되어야 하기때문에, 명시적인 리턴은 없다.
 	public static void dfs(int x, int y) {
 		arr[x][y] = -1;		// 방문여부
 		
