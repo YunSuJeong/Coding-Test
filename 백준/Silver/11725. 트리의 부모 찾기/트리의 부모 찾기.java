@@ -13,6 +13,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
 		
 		N = Integer.parseInt(br.readLine());
 		for(int i=0; i<N; i++) {
@@ -35,8 +36,9 @@ public class Main {
 		dfs(parent, 0);
 		
 		for(int i=1; i<N; i++) {
-			System.out.println(parent[i]);
+			sb.append(parent[i]+"\n");
 		}
+		System.out.println(sb.toString());
 	}
 
 	public static void dfs(int[] parent, int num) {
