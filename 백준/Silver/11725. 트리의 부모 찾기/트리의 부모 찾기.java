@@ -2,7 +2,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -31,9 +33,12 @@ public class Main {
 			tree.get(n2).add(n1);
 		}
 		
-		// dfs로 부모 노드 찾기
+		// 1. dfs로 부모 노드 찾기
 		parent = new int[N];
-		dfs(parent, 0);
+//		dfs(0);
+
+		// 2. bfs로 부모 노드 찾기
+		bfs(0);
 		
 		for(int i=1; i<N; i++) {
 			sb.append(parent[i]+"\n");
@@ -41,11 +46,28 @@ public class Main {
 		System.out.println(sb.toString());
 	}
 
-	public static void dfs(int[] parent, int num) {
+	/*public static void dfs(int num) {
 		for(int n : tree.get(num)) {
 			if( parent[n] == 0 ) {
 				parent[n] = num+1;		// 부모노드 저장
-				dfs(parent, n);
+				dfs(n);
+			}
+		}
+	}*/
+	
+	public static void bfs(int num) {
+		Queue<Integer> queue = new LinkedList<Integer>();
+		
+		queue.offer(num);
+		
+		while( !queue.isEmpty() ) {
+			int p = queue.poll();
+			
+			for(int n : tree.get(p)) {
+				if( parent[n] == 0 ) {
+					parent[n] = p+1;
+					queue.offer(n);
+				}
 			}
 		}
 	}
