@@ -12,8 +12,6 @@ public class Solution {
 		for(int tc=1; tc<=T; tc++) {
 			int N = sc.nextInt();
 			
-			int n = N/20;
-			if( N % 20 > 0 ) n++;
 			for(int i=0; i<N; i++) {
 				sb.append(sc.next());
 			}
