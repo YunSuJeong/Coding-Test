@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,7 +30,7 @@ public class Main {
 				if( j >= arr[i-1][0] ) {
 					value[j][i] = Math.max(value[j][i-1], value[j-arr[i-1][0]][i-1] + arr[i-1][1]);
 				} else {
-					value[j][i] = Math.max(value[j][i-1], value[j][i-1]);
+					value[j][i] = value[j][i-1];
 				}
 			}
 		}
