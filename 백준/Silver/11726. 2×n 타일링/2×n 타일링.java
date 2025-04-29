@@ -8,15 +8,17 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int N = Integer.parseInt(br.readLine());
+		int MOD = 10007;
 		
-		int arr[] = new int[N+1];
-		
+		int[] dp = new int[N+1];
 		for(int i=1; i<=N; i++) {
-			if( i <= 2 ) arr[i] = i;
-			else arr[i] = (arr[i-1] + arr[i-2])%10007;
+			if( i < 3 ) {
+				dp[i] = i;
+			} else {
+				dp[i] = (dp[i-2] + dp[i-1]) % MOD;
+			}
 		}
-		
-		System.out.println(arr[N]%10007);
+		System.out.println(dp[N]);
 	}
 
 }
