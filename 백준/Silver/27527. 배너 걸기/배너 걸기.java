@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -21,35 +19,34 @@ public class Main {
 			arr[i] = Integer.parseInt(A.nextToken());
 		}
 		
-		int count = 9 * M / 10;
-		if( 9 * M % 10 != 0 ) count++;
+		int num = M * 9 / 10;
+		if( M * 9 % 10 > 0 ) num++;
 		
-		// 초기 윈도우 맵에 저장 (높이, 해당 구간에서 같은 높이 개수)
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		String result = "NO";
-		int max = 0;
+		int[] cnt = new int[1000001];
+		
+		// 초기 윈도우 세팅
+		boolean flag = false;
 		for(int i=0; i<M; i++) {
-			int cnt = map.getOrDefault(arr[i], 0)+1;
-			map.put(arr[i], cnt);
-			max = Math.max(max, cnt);
+			cnt[arr[i]]++;
+			
+			if( cnt[arr[i]] >= num ) flag = true;
 		}
-		if( max >= count ) result = "YES";
 		
-		// 나머지 구간 탐색
-		for(int i=0; i<N-M; i++) {
-			map.put(arr[i], map.get(arr[i])-1);
-			int cnt = map.getOrDefault(arr[i+M], 0)+1;
-			map.put(arr[i+M], cnt);
-			
-			max = Math.max(max, cnt);
-			
-			if( max >= count ) {
-				result = "YES";
-				break;
+		if( !flag ) {
+			for(int i=0; i<N-M; i++) {
+				int prev = arr[i];
+				int next = arr[i+M];
+				
+				cnt[prev]--;			// 맵 앞을 제외시키고
+				cnt[next]++;			// 다음 한 칸을 포함시켜 윈도우 크기 유지
+				
+				if( cnt[next] >= num ) {
+					flag = true;
+					break;
+				}
 			}
 		}
-		
-		System.out.println(result);
+		System.out.println(flag ? "YES" : "NO");
 	}
 
 }
