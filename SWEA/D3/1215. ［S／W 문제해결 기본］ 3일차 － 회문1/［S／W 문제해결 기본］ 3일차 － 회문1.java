@@ -1,52 +1,46 @@
-import java.util.Scanner;
-import java.io.FileInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-class Solution
-{
-	public static void main(String args[]) throws Exception
-	{
-		Scanner  sc = new Scanner(System.in);
+public class Solution {
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
-		for(int test_case = 1; test_case <= 10; test_case++)
-		{
-			int N = sc.nextInt();
-            String arr[][] = new String[8][8];
-            // 8*8 입력받기
-            for(int i=0; i<8; i++) {
-                String str = sc.next();
-                int j=0;
-                for(String s : str.split("")) {
-                    arr[i][j] = s;
-                    j++;
-                }
-            }
-            
-           	int word = 0;
-            for(int i=0; i<8; i++) {
-                for(int j=0; j<8-N+1; j++) {
-                	boolean flag_h = true, flag_w = true;
-                    for(int w=0; w<N/2; w++) {
-                        //System.out.println(i+" "+j+" "+(j+w)+" "+(j+N-1-w)+" "+arr[i][j+w]+" "+arr[i][j+N-1-w]);
-                        if( arr[i][j+w].equals(arr[i][j+N-1-w]) ) {
-                        	// 가로 회문 췤
-                        } else {
-                        	flag_h = false;
-                        	break;
-                        }
-                    }
-                    for(int w=0; w<N/2; w++) {
-	                    if( arr[j+w][i].equals(arr[j+N-1-w][i]) ) {
-	                    	// 세로 회문 췤
-						} else {
-							flag_w = false;
+		for(int tc=1; tc<=10; tc++) {
+			int len = Integer.parseInt(br.readLine());
+
+			char[][] arr = new char[8][8];
+			for(int i=0; i<8; i++) {
+				String str = br.readLine();
+				for(int j=0; j<8; j++) {
+					arr[i][j] = str.charAt(j);
+				}
+			}
+			
+			int cnt = 0;
+			for(int i=0; i<8; i++) {
+				for(int j=0; j<8-len+1; j++) {
+					boolean flag1 = true, flag2 = true;
+					for(int k=0; k<len/2; k++) {
+						if( arr[i][j+k] != arr[i][j+len-k-1] ) {
+							flag1 = false;
 							break;
 						}
-                    }
-                    if( flag_h ) word++;
-                    if( flag_w ) word++;
-                }
-            }
-            System.out.printf("#%d %d\n", test_case, word);
+					}
+					for(int k=0; k<len/2; k++) {
+						if( arr[j+k][i] != arr[j+len-k-1][i] ) {
+							flag2 = false;
+							break;
+						}
+					}
+					if( flag1 ) cnt++;
+					if( flag2 ) cnt++;
+				}
+			}
+			
+			System.out.printf("#%d %d\n", tc, cnt);
 		}
 	}
+
 }
