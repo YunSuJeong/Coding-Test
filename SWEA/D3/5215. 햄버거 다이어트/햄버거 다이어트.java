@@ -1,56 +1,47 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Solution {
 	
-	public static int max = 0, N, L;
+	public static int N, L, max = Integer.MIN_VALUE;
+	public static int[] T, K;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder sb = new StringBuilder();
 		
-		int T = Integer.parseInt(br.readLine());
-		
-		for(int tc=0; tc<T; tc++) {
+		int TC = Integer.parseInt(br.readLine());
+		for(int tc=1; tc<=TC; tc++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			
-			N = Integer.parseInt(st.nextToken());		// 재료 수
-			L = Integer.parseInt(st.nextToken());		// 제한 칼로리
+			N = Integer.parseInt(st.nextToken());
+			L = Integer.parseInt(st.nextToken());
 			
-			int[][] arr = new int[N][2];
+			T = new int[N];
+			K = new int[N];
 			for(int i=0; i<N; i++) {
-				StringTokenizer input = new StringTokenizer(br.readLine());
+				StringTokenizer ingre = new StringTokenizer(br.readLine());
 				
-				int k = Integer.parseInt(input.nextToken());
-				int t = Integer.parseInt(input.nextToken());
-				
-				arr[i][0] = t;			// 칼로리
-				arr[i][1] = k;			// 맛에 대한 점수
+				T[i] = Integer.parseInt(ingre.nextToken());
+				K[i] = Integer.parseInt(ingre.nextToken());
 			}
 			
-			// 햄버거 점수 최댓값 구하기
-			order(arr, 0, 0, 0);
+			hamburger(0, 0, 0);
 			
-			System.out.printf("#%d %d\n", tc+1, max);
-			max = 0;
+			System.out.printf("#%d %d\n", tc, max);
+			max = Integer.MIN_VALUE;
 		}
 	}
 	
-	public static void order(int[][] arr, int idx, int curr, int score) {
-		if( curr > L ) return;
-		
-		if( idx == N ) {
-			max = Math.max(max, score);
+	public static void hamburger(int n, int score, int kcal) {
+		if( n == N ) {
+			if( kcal <= L ) max = Math.max(max, score);
 			return;
-		} 
+		}
 		
-		// 현재 재료 넣는 경우
-		order(arr, idx+1, curr + arr[idx][0], score + arr[idx][1]);
-		
-		// 넣지 않는 경우
-		order(arr, idx+1, curr, score);
+		hamburger(n+1, score + T[n], kcal + K[n]);
+		hamburger(n+1, score, kcal);
 	}
+
 }
