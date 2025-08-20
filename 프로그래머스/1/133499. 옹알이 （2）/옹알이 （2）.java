@@ -1,8 +1,4 @@
 class Solution {
-    public void main() {
-        System.out.println(solution(new String[] {"wayaoo"}));
-    }
-    
     public int solution(String[] babbling) {
         int answer = 0;
         String[] word = {"aya", "ye", "woo", "ma"};
@@ -22,11 +18,10 @@ class Solution {
                 babbling[i] = babbling[i].replaceFirst(word[j], " ");
                 
                 // 연속해서 같은 발음인 경우, 다음 발음으로 넘어감
-                // '연속'의 기준 = (현재 발음 첫 위치 + 발음 길이 - 1(공백) == 발음의 다음 위치) 
+                // '연속'의 기준 = (현재 발음 첫 위치 + 1(공백) == 발음의 다음 위치) 
                 if( idx + 1 == babbling[i].indexOf(word[j]) ) j++;
             }
             // 공백을 없앤 단어길이가 0이라면, 발음 가능한 단어이므로 카운팅
-            System.out.println(babbling[i]);
             if( babbling[i].replace(" ", "").length() == 0 ) answer++;
         }
         
