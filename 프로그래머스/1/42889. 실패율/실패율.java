@@ -4,7 +4,7 @@ class Solution {
     public int[] solution(int N, int[] stages) {
         int[] answer = new int[N];
         
-        int[] curr = new int[N];                // 스테이지에 도달했으나 아직 클리어 못한 플레이어 수
+        int[] curr = new int[N];                    // 스테이지에 도달했으나 아직 클리어 못한 플레이어 수
         double[][] failRate = new double[N][2];     // 실패율 배열
         
         for(int i=0; i<stages.length; i++) {
@@ -27,10 +27,6 @@ class Solution {
                 else return (int)(o1[0] - o2[0]);                              // 번호 오름차순
             }
         });
-        
-        for(int i=0; i<N; i++) {
-            System.out.println(failRate[i][1]);
-        }
                                  
         for(int i=0; i<N; i++) {
             answer[i] = (int) failRate[i][0];
