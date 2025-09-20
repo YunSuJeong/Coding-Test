@@ -17,13 +17,14 @@ class Solution {
             String type = privacies[i].split(" ")[1];
             int period = map.get(type);
             
-            int year = Integer.parseInt(info.split("\\.")[0]) + period / 12;
-            int month = Integer.parseInt(info.split("\\.")[1]) + period % 12;
+            int year = Integer.parseInt(info.split("\\.")[0]);
+            int month = Integer.parseInt(info.split("\\.")[1]) + period;
             int day = Integer.parseInt(info.split("\\.")[2]);
             
             if( month > 12 ) {
                 year += month / 12;
-                month = month % 12 == 0 ? month : month % 12;
+                if( month % 12 == 0 ) year--;
+                month = month % 12 == 0 ? 12 : month % 12;
             }
             
             if( ( (year < YYYY) || (year == YYYY && month < MM )) || (year == YYYY && month == MM && day <= DD) ) answer.add(i+1);
