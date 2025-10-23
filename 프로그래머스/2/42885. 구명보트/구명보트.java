@@ -7,17 +7,11 @@ class Solution {
         Arrays.sort(people);
         
         int l = 0, r = people.length-1;
-        while( l < r ) {
-            if( people[l] + people[r] <= limit ) {
-                l++;
-                r--;
-            } else {
-                r--;
-            }
+        while( l <= r ) {
+            if( people[l] + people[r] <= limit ) l++;
+            r--;
             answer++;
         }
-        
-        if( l == r ) answer++;      // 마지막 혼자 남은 사람
         
         return answer;
     }
