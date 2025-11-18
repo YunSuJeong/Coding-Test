@@ -9,31 +9,27 @@ public class Solution {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int T = Integer.parseInt(br.readLine());
-		
 		for(int tc=1; tc<=T; tc++) {
-			int N = Integer.parseInt(br.readLine());
+			int n = Integer.parseInt(br.readLine());
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			
-			int[] arr = new int[101];
-			for(int i=0; i<1000; i++) {
-				int score = Integer.parseInt(st.nextToken());
-				arr[score]++;
-			}
-			
+			int[] score = new int[101];
 			int max = 0;
-			for(int s : arr) {
-				max = Math.max(max, s);
+			for(int i=0; i<1000; i++) {
+				int s = Integer.parseInt(st.nextToken());
+				score[s]++;
+				max = Math.max(max, score[s]);
 			}
 			
-			int mode = 0;
+			int cnt = 0;
 			for(int i=100; i>=0; i--) {
-				if( max == arr[i] ) {
-					mode = i;
+				if( score[i] == max ) {
+					cnt = i;
 					break;
 				}
 			}
-			System.out.printf("#%d %d\n", N, mode);
+			System.out.printf("#%d %d\n", n, cnt);
 		}
- 	}
+	}
 
 }
