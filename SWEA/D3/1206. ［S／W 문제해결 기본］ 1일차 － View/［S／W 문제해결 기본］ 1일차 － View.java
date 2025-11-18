@@ -8,23 +8,28 @@ public class Solution {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
+		int[] view = {-2, -1, 1, 2};		// 조망권 확보를 위한 탐색 범위
+		
 		for(int tc=1; tc<=10; tc++) {
 			int N = Integer.parseInt(br.readLine());
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			
-			int[] arr = new int[N];
+			int[] building = new int[N];
 			for(int i=0; i<N; i++) {
-				arr[i] = Integer.parseInt(st.nextToken());
+				building[i] = Integer.parseInt(st.nextToken());
 			}
 			
-			int sum = 0;
+			int cnt = 0;
 			for(int i=2; i<N-2; i++) {
-				if( arr[i] > arr[i-1] && arr[i] > arr[i-2] && arr[i] > arr[i+1] && arr[i] > arr[i+2] ) {
-					int max = Math.max(arr[i-1], Math.max(arr[i-2], Math.max(arr[i+1], arr[i+2])));
-					sum += arr[i] - max;
+				int max = 0;
+				for(int j=0; j<4; j++) {
+					max = Math.max(max, building[i+view[j]]);
 				}
+				
+				if( building[i] > max ) cnt += building[i] - max;
 			}
-			System.out.printf("#%d %d\n", tc, sum);
+			
+			System.out.printf("#%d %d\n", tc, cnt);
 		}
 	}
 
