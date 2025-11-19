@@ -8,17 +8,18 @@ public class Solution {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		for(int tc=1; tc<=10; tc++) {
-			int T = Integer.parseInt(br.readLine());
-			
-			String str1 = br.readLine();
-			String str2 = br.readLine();
+			int N = Integer.parseInt(br.readLine());
+			String word = br.readLine();
+			String str = br.readLine();
 			
 			int cnt = 0;
-			while( str2.indexOf(str1) >= 0 ) {
-				str2 = str2.replaceFirst(str1, ".");
+			while( str.indexOf(word) >= 0 ) {
 				cnt++;
+				
+				str = str.replaceFirst(word, ".");
 			}
-			System.out.printf("#%d %d\n", T, cnt);
+			
+			System.out.printf("#%d %d\n", N, cnt);
 		}
 	}
 
