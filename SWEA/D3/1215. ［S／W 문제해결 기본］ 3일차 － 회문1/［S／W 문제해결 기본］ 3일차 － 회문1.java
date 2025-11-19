@@ -3,14 +3,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Solution {
+	
+	public static char[][] arr = new char[8][8];
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
+		arr = new char[8][8];
 		for(int tc=1; tc<=10; tc++) {
-			int len = Integer.parseInt(br.readLine());
-
-			char[][] arr = new char[8][8];
+			int l = Integer.parseInt(br.readLine());
+			
 			for(int i=0; i<8; i++) {
 				String str = br.readLine();
 				for(int j=0; j<8; j++) {
@@ -18,29 +20,37 @@ public class Solution {
 				}
 			}
 			
-			int cnt = 0;
+			int count = 0;
 			for(int i=0; i<8; i++) {
-				for(int j=0; j<8-len+1; j++) {
-					boolean flag1 = true, flag2 = true;
-					for(int k=0; k<len/2; k++) {
-						if( arr[i][j+k] != arr[i][j+len-k-1] ) {
-							flag1 = false;
-							break;
-						}
-					}
-					for(int k=0; k<len/2; k++) {
-						if( arr[j+k][i] != arr[j+len-k-1][i] ) {
-							flag2 = false;
-							break;
-						}
-					}
-					if( flag1 ) cnt++;
-					if( flag2 ) cnt++;
+				for(int j=0; j<=8-l; j++) {
+					count += isPalin(l, i, j);
 				}
 			}
 			
-			System.out.printf("#%d %d\n", tc, cnt);
+			System.out.printf("#%d %d\n", tc, count);
 		}
 	}
 
+	public static int isPalin(int l, int n, int m) {
+		int count = 0;
+		
+		boolean w = true, h = true;
+		for(int i=0; i<l/2; i++) {
+			if( arr[n][m+i] != arr[n][m+l-i-1] ) {
+				w = false;
+				break;
+			}
+		}
+		
+		for(int i=0; i<l/2; i++) {
+			if( arr[m+i][n] != arr[m+l-i-1][n] ) {
+				h = false;
+				break;
+			}
+		}
+		
+		if( w ) count++;
+		if( h ) count++;
+		return count;
+	}
 }
